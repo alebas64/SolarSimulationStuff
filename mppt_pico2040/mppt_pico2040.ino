@@ -3,12 +3,10 @@
 #include <U8g2lib.h>
 
 #define pinLed 25    //BUILTIN_LED
-
 #define analog_A0 26 //tensione in ingresso
 #define analog_A1 27 //tensione in uscita
 #define analog_A2 28 //corrente in ingresso
 #define analog_A3 29 //corrente in uscita
-
 #define digital_D6  0 //PWM channel 
 #define digital_D10 3 //shutdown IR2104
 
@@ -28,17 +26,14 @@ RP2040_PWM* PWM_Instance;
 
 float frequency = 250000.0f; //frequenza di 250kHz 
 float dutyCycle = 0.0f;
-
 //non c'è bisogno di utilizzare un valore in float, il microcontrollore
 //è più veloce a fare conti con gli interi
 volatile uint16_t Vin=0;
 volatile uint16_t Vout=0;
 volatile int16_t Iin=0;
 volatile int16_t Iout=0;
-
 volatile uint16_t old_Vin=0;
 volatile uint16_t old_Iin=0;
-
 volatile bool core0_ready = false;
 volatile bool core1_ready = false;
 /*
@@ -56,7 +51,6 @@ indica cosa sta facendo il core0 durante il suo funzionamento
 14 - backflow current in&out
 */
 volatile uint8_t state=0;
-
 //alla fine dei controlli l'algoritmo di MPPT guarda questo parametro
 //se vero modifica il duty cycle aggiornandolo, se falso non fa nulla
 volatile bool duty_change = false;
@@ -76,13 +70,10 @@ void setup(){
     if (PWM_Instance){
     PWM_Instance->setPWM();
     }
-    
     pinMode(digital_D10,OUTPUT);
     pinMode(pinLed,OUTPUT);
-    
     analogReading();
     value_update();
-
     digitalWrite(digital_D10,HIGH);
     PWM_Instance->setPWM(digital_D6, frequency, dutyCycle+0.1f);
     state = 1;

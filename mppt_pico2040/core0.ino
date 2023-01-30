@@ -53,21 +53,15 @@ void loop(){
         }
         value_update();
     }
-    
-    
 }
-
 /*
 Legenda valori (da verificare con una taratura)
 analog_A0
 0 a 4096 = 0V a 38V per Vin
-
 analog_A1
 0 a 4096 = 0V a 62V per Vout
-
 analog_A2 e analog_A3
 -1240 a 2865 = -5A a +5A per Iin e Iout
-
 */
 void analogReading(){
     Vin = analogRead(analog_A0);
@@ -75,7 +69,6 @@ void analogReading(){
     Iin = analogRead(analog_A2)-1240;
     Iout = analogRead(analog_A3)-1240;
 }
-
 void value_update(){
     old_Vin = Vin;
     old_Iin = Iin;

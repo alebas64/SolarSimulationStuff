@@ -2,7 +2,6 @@ float powerIN=0;
 float powerOUT=0;
 float r_Vin,r_Vout,r_Iin,r_Iout;
 float efficiency=0;
-
 uint8_t brightness = 0;
 uint8_t modifier = 15;
 
